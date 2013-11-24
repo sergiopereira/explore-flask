@@ -26,3 +26,39 @@ h1, h2 {
 .avatar {
   border-radius: 50%;
 }
+
+.button {
+  text-align: center;
+  display: block;
+  min-height: 40px;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffde00), color-stop(100%, #edc610));
+  background: -webkit-linear-gradient(top, #ffde00, #edc610);
+  background: -moz-linear-gradient(top, #ffde00, #edc610);
+  background: -o-linear-gradient(top, #ffde00, #edc610);
+  background: linear-gradient(top, #ffde00, #edc610);
+  border: 0;
+  font-size: 1.5em;
+  padding: 10px;
+  cursor: pointer;
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+  color: #796419;
+  text-decoration: none;
+}
+
+.button:link, .button:visited {
+  color: #796419;
+}
+
+.button:hover {
+  color: #9d801a !important;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffee2d), color-stop(100%, #f7cc04));
+  background: -webkit-linear-gradient(top, #ffee2d, #f7cc04);
+  background: -moz-linear-gradient(top, #ffee2d, #f7cc04);
+  background: -o-linear-gradient(top, #ffee2d, #f7cc04);
+  background: linear-gradient(top, #ffee2d, #f7cc04);
+}
+
+.button:active {
+  position: relative;
+  top: 1px;
+}
