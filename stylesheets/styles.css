@@ -8,7 +8,7 @@ body {
   background-color: white;
   max-width: 48em;
   border: 1px solid #BCCBEB;
-  padding: 0 5%;
+  padding: 0 5% 5% 5%;
 }
 
 .center {
@@ -17,4 +17,8 @@ body {
 
 .leader {
   font-size: 23px;
+}
+
+.avatar {
+  border-radius: 50%;
 }
