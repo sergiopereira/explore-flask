@@ -30,3 +30,12 @@ h1, h2 {
 .status {
   float: right;
 }
+
+#mc_embed_signup {
+}
+
+#mc_embed_signup input {
+  width: 60%;
+  padding: 7px;
+  margin-top: 7px;
+}
