@@ -15,6 +15,13 @@ h1, h2 {
   font-family: "museo-slab";
 }
 
+a,
+a:link,
+a:visited {
+  color: maroon;
+  text-decoration: none;
+}
+
 .center {
   text-align: center;
 }
@@ -38,4 +45,13 @@ h1, h2 {
   width: 60%;
   padding: 7px;
   margin-top: 7px;
+}
+
+.fa-github {
+  color: #333;
+}
+
+.fa-twitter {
+  color: #55ACEE;
+  margin-right: 5px;
 }
