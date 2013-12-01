@@ -85,3 +85,7 @@ a.button {
   color: #55ACEE;
   margin-right: 5px;
 }
+
+.grid-parent:not(:last-child) {
+  margin-bottom: 50px;
+}
