@@ -14,7 +14,7 @@ def decorated():
     pass
 ```
 
-If you’ve gone through the Flask tutorial, that syntax might look familiar to you. `@app.route` is a decorator used to route URLs to view functions in Flask apps. 
+If you’ve gone through the Flask tutorial, that syntax might look familiar to you. `@app.route` is a decorator used to route URLs to view functions in Flask apps.
 
 Let’s take a look at some other decorators you can use in your Flask apps.
 
@@ -65,7 +65,7 @@ def index():
     [...] # Make a few database calls to get the information you need
     return render_template(
         'index.html',
-        latest_posts=latest_posts, 
+        latest_posts=latest_posts,
         recent_users=recent_users,
         recent_photos=recent_photos
     )
@@ -228,7 +228,7 @@ We need to define two methods: `to_python()` and `to_url()`. As the titles sugge
 
 To use our ListConverter, we first have to tell Flask that it exists.
 
-/myapp/__init__.py
+/myapp/\_\_init__.py
 ```
 from flask import Flask
 

@@ -6,7 +6,7 @@ When you're learning Flask, configuration seems simple. You just define some var
 
 ## The simple case
 
-A simple application may not need any of these complicated features. You may just need to put _config.py_ in the root of your repository and load it in _app.py_ or _yourapp/__init__.py_
+A simple application may not need any of these complicated features. You may just need to put _config.py_ in the root of your repository and load it in _app.py_ or _yourapp/\_\_init__.py_
 
  _config.py_  should contain one variable assignment per line. Once _config.py_ is loaded later, the configuration variables will be accessible via the `app.config` dictionary, e.g. `app.config[“DEBUG”]`. Here’s an example of a typical _config.py_ file for a small project:
 
@@ -18,7 +18,7 @@ MAIL_FROM_EMAIL = "robert@example.com" # For use in application emails
 
 There are some built-in configuration variables like `DEBUG`. There are also some configuration variables for extensions that you may be using like `BCRYPT_LEVEL` for the Flask-Bcrypt extension, used for password hashing. You can even define your own configuration variables for use throughout the application. In this example, I would use `app.config[“MAIL_FROM_EMAIL”]` whenever I needed the default “from” address for a transactional email (e.g. password resets). It makes it easy to change that later on.
 
-To load these configuration variables into the application, I would use `app.config.from_object()` in _app.py_ for a single-module application or _yourapp/__init__.py_ for a package based application. In either case, the code looks something like this:
+To load these configuration variables into the application, I would use `app.config.from_object()` in _app.py_ for a single-module application or _yourapp/\_\_init__.py_ for a package based application. In either case, the code looks something like this:
 
 ```
 from flask import Flask
@@ -52,7 +52,7 @@ run.py
 instance/
   config.py
 yourapp/
-  __init__.py
+  \_\_init__.py
   models.py
   views.py
   templates/
@@ -101,7 +101,7 @@ DEBUG = True
 SQLALCHEMY_ECHO = True
 ```
 
-Then in production, you would leave these lines out of _instance/config.py_ and it would fall back to the values defined in _config.py_. 
+Then in production, you would leave these lines out of _instance/config.py_ and it would fall back to the values defined in _config.py_.
 
 { SEE MORE:
 * Read about Flask-SQLAlchemy’s configuration keys here: http://pythonhosted.org/Flask-SQLAlchemy/config.html#configuration-keys
@@ -109,7 +109,7 @@ Then in production, you would leave these lines out of _instance/config.py_ and 
 
 ## Configuring from envvar
 
-The instance folder shouldn’t be in version control. This means that you won’t be able to track changes to your instance configurations. That might not be a problem with one or two variables, but if you have a finely tuned configurations for various environments (production, staging, development, etc.) you don’t want to risk losing that. 
+The instance folder shouldn’t be in version control. This means that you won’t be able to track changes to your instance configurations. That might not be a problem with one or two variables, but if you have a finely tuned configurations for various environments (production, staging, development, etc.) you don’t want to risk losing that.
 
 Flask gives us the ability to choose a configuration file on the fly based on the value of an environment variable. This means that we can have several configuration files in our repository (and in version control) and always load the right one, depending on the environment.
 
@@ -119,7 +119,7 @@ When we’re at the point of having several configuration files in the repositor
 requirements.txt
 run.py
 config/
-  __init__.py # Empty, just here to tell Python that it's a package.
+  \_\_init__.py # Empty, just here to tell Python that it's a package.
   default.py
   production.py
   development.py
@@ -127,7 +127,7 @@ config/
 instance/
   config.py
 yourapp/
-  __init__.py
+  \_\_init__.py
   models.py
   views.py
   static/
@@ -145,7 +145,7 @@ In this case we have a few different configuration files:
 
 To actually use these files in your various environments, you can make a call to `app.config.from_envvar()`:
 
-yourapp/__init__.py
+yourapp/\_\_init__.py
 ```
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object('config.default')
@@ -153,7 +153,7 @@ app.config.from_pyfile('config.py') # Don't forget our instance folder
 app.config.from_envvar('APP_CONFIG_FILE')
 ```
 
-`app.config.from_envvar(‘APP_CONFIG_FILE’)` will load the file specified in the environment variable `APP_CONFIG_FILE`. The value of that environment variable should be the full path of a configuration file. 
+`app.config.from_envvar(‘APP_CONFIG_FILE’)` will load the file specified in the environment variable `APP_CONFIG_FILE`. The value of that environment variable should be the full path of a configuration file.
 
 
 How you set this environment variable depends on the platform on which you’re running your app. If you’re running on a regular Linux server, you could set up a shell script that sets the environment variables and runs `run.py`:

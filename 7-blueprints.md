@@ -22,50 +22,50 @@ With a functional structure, you organize the pieces of your app by what they do
 
 ```
 yourapp/
-    __init__.py
+    \_\_init__.py
     static/
     templates/
         home/
         control_panel/
         admin/
     views/
-        __init__.py
+        \_\_init__.py
         home.py
         control_panel.py
         admin.py
     models.py
 ```
 
-With the exception of yourapp/views/__init__.py, each of the _.py_ files in the _yourapp/views/_ directory is a blueprint. In _yourapp/__init__.py_ we would import those blueprints and **register** them on our `Flask()` object. We’ll look a little more at how this is implemented later in this chapter. 
+With the exception of yourapp/views/\_\_init__.py, each of the _.py_ files in the _yourapp/views/_ directory is a blueprint. In _yourapp/\_\_init__.py_ we would import those blueprints and **register** them on our `Flask()` object. We’ll look a little more at how this is implemented later in this chapter.
 
 { Note: At the time of writing this, the Flask website at flask.pocoo.org uses this structure. https://github.com/mitsuhiko/flask/tree/website/flask_website }
 
 ### Divisional
 
-With the divisional structure, you organize the pieces of the application based on which part of the app they contribute to. All of the templates, views and static files for the admin panel go in one directory, and those for the user control panel go in another. 
+With the divisional structure, you organize the pieces of the application based on which part of the app they contribute to. All of the templates, views and static files for the admin panel go in one directory, and those for the user control panel go in another.
 
 ```
 yourapp/
-    __init__.py
+    \_\_init__.py
     admin/
-        __init__.py
+        \_\_init__.py
         views.py
         static/
         templates/
     home/
-        __init__.py
+        \_\_init__.py
         views.py
         static/
         templates/
     control_panel/
-        __init__.py
+        \_\_init__.py
         views.py
         static/
         templates/
     models.py
 ```
 
-Here, each directory under _yourapp/_ is a separate blueprint. All of the blueprints are applied to the `Flask()` app in the top-level ___init__.py_
+Here, each directory under _yourapp/_ is a separate blueprint. All of the blueprints are applied to the `Flask()` app in the top-level _\_\_init__.py_
 
 ### Which one is best?
 
@@ -77,7 +77,7 @@ On the other hand, if the components of your app flow together a little more, it
 
 ```
 facebook/
-    __init__.py
+    \_\_init__.py
     templates/
         layout.html
         home/
@@ -104,7 +104,7 @@ facebook/
             security.html
             general.html
     views/
-        __init__.py
+        \_\_init__.py
         home.py
         dashboard.py
         profile.py
@@ -156,7 +156,7 @@ profile = Blueprint('profile', __name__, template_folder='templates', static_fol
 
 We have now defined our blueprint. It's time to extend our Flask app with it by registering it.
 
-facebook/__init__.py
+facebook/\_\_init__.py
 ```
 from flask import Flask
 from .views.profile import profile
@@ -188,7 +188,7 @@ profile = Blueprint('profile', __name__, url_prefix='/<user_url_slug>')
 
 Here we are setting the url_prefix on registration:
 
-facebook/__init__.py
+facebook/\_\_init__.py
 ```
 from flask import Flask
 from .views.profile import profile
@@ -207,7 +207,7 @@ from flask import Blueprint, render_template, g
 
 from ..models import User
 
-# The prefix is defined in facebook/__init__.py.
+# The prefix is defined in facebook/\_\_init__.py.
 profile = Blueprint('profile', __name__)
 
 @profile.url_value_preprocessor
@@ -249,23 +249,23 @@ For this section I'm going to use the example of an application that lets users 
 
 ```
 sitemaker/
-    __init__.py
+    \_\_init__.py
     home/
-        __init__.py
+        \_\_init__.py
         views.py
         templates/
             home/
         static/
             home/
     dash/
-        __init__.py
+        \_\_init__.py
         views.py
         templates/
             dash/
         static/
             dash/
     site/
-        __init__.py
+        \_\_init__.py
         views.py
         templates/
             site/
@@ -282,9 +282,9 @@ sitemaker/
 * bigdaddy.sitemaker.com : _sitemaker/site_ - This blueprint uses a dynamic subdomain and includes the elements of the user’s website. We’ll go over some of the code used to implement this blueprint below.
 * bigdaddy.sitemaker.com/admin : _sitemaker/dash_ - This blueprint could use both a dynamic subdomain and a URL prefix by combining the techniques in this section with those from the previous section.
 
-We can define our dynamic subdomain the same way we defined our URL prefix. Both options (in the blueprint directory or in the top-level ___init__.py_) are available, but once again we’ll keep the definitions in _sitemaker/__init.py___.
+We can define our dynamic subdomain the same way we defined our URL prefix. Both options (in the blueprint directory or in the top-level _\_\_init__.py_) are available, but once again we’ll keep the definitions in _sitemaker/__init.py___.
 
-sitemaker/__init__.py
+sitemaker/\_\_init__.py
 ```
 from flask import Flask
 from .site import site
@@ -293,9 +293,9 @@ app = Flask(__name__)
 app.register_blueprint(site, subdomain='<site_subdomain>')
 ```
 
-In a divisional structure, the blueprint will be defined in _sitemaker/site/__init__.py_. 
+In a divisional structure, the blueprint will be defined in _sitemaker/site/\_\_init__.py_.
 
-sitemaker/site/__init__py
+sitemaker/site/\_\_init__py
 ```
 from flask import Blueprint
 
@@ -340,7 +340,7 @@ config.txt
 requirements.txt
 run.py
 gnizama/
-  __init__.py
+  \_\_init__.py
   views.py
   models.py
   templates/
@@ -365,7 +365,7 @@ config.txt
 requirements.txt
 run.py
 gnizama/
-  __init__.py
+  \_\_init__.py
   home/
     views.py
     static/
@@ -392,7 +392,7 @@ tests/
 
 ### Step 3: Cut the crap
 
-Now we can go into each blueprint and remove the views, static files and templates that don’t apply to that blueprint. How you go about this step largely depends on how you’re app was organized to begin with. 
+Now we can go into each blueprint and remove the views, static files and templates that don’t apply to that blueprint. How you go about this step largely depends on how you’re app was organized to begin with.
 
 The end result should be that each blueprint has a `views.py` file with all of the views for that blueprint. No two blueprints should define a view for the same route. Each _templates/_ directory should only include the templates for the views in that blueprint. Each _static/_ directory should only include the static files that should be exposed by that blueprint.
 
@@ -400,9 +400,9 @@ The end result should be that each blueprint has a `views.py` file with all of t
 
 ### Step 4: Blueprint...ifi...cation or something of that nature
 
-This is the part where we turn our directories into blueprints. The key is in the ___init__.py_ files. For starters, let’s take a look at the definition of the API blueprint.
+This is the part where we turn our directories into blueprints. The key is in the _\_\_init__.py_ files. For starters, let’s take a look at the definition of the API blueprint.
 
-_gnizama/api/__init__.py_
+_gnizama/api/\_\_init__.py_
 ```
 from flask import Blueprint
 
@@ -416,9 +416,9 @@ api = Blueprint(
 import .views
 ```
 
-Then we can register this blueprint in the gnizama package’s top-level ___init__.py_ file.
+Then we can register this blueprint in the gnizama package’s top-level _\_\_init__.py_ file.
 
-_gnizama/__init__.py_
+_gnizama/\_\_init__.py_
 ```
 from flask import Flask
 from .api import api

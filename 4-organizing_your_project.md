@@ -35,13 +35,13 @@ static/
 templates/
 ```
 
-Application logic would sit in _app.py_ in this example. 
+Application logic would sit in _app.py_ in this example.
 
 ### Package
 
 When you’re working on a project that’s a little more complex, a single module can get messy. You’ll need to define classes for models and forms, and they’ll get mixed in with the code for your routes and configuration. All of this can frustrate development. To solve this problem, we can factor out the different components of our app into a group of inter-connected modules — a package.
 
-The repository for a package-based application will probably look something like this: 
+The repository for a package-based application will probably look something like this:
 
 ```
 config.py
@@ -50,7 +50,7 @@ run.py
 instance/
   /config.py
 yourapp/
-  /__init__.py
+  /\_\_init__.py
   /views.py
   /models.py
   /forms.py
@@ -74,7 +74,7 @@ This table provides a basic rundown of the components you'll find in most Flask 
 
 /yourapp/ : This is the package that contains your application.
 
-/yourapp/__init__.py : This file initializes your application and brings together all of the various components.
+/yourapp/\_\_init__.py : This file initializes your application and brings together all of the various components.
 
 /yourapp/views.py : This is where the routes are defined. It may be split into a package of its own (_yourapp/views/_) with related views grouped together into modules.
 
